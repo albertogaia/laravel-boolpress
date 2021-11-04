@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::all();
+        $posts = Post::all();
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -46,9 +46,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $post = Post::where('slug', $slug);
+        if(!$post){
+            abort(404);
+        }return view('admin.posts.show', compact('post'));
     }
 
     /**
