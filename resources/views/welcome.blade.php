@@ -62,20 +62,13 @@
                 margin-bottom: 30px;
             }
         </style>
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
     </head>
     <body>
-        <div class="flex-center">
+        <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/admin') }}">Pannello di controllo</a>
-                        <a href="{{route('logout')}}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">LOGOUT</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                        <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -88,19 +81,18 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Il mio blog
+                    Laravel
                 </div>
-                <div class="d-flex">
-                    @foreach ($posts as $post)
-                        <div class="card m-2" style="width: 18rem;">
-                            <img src="{{$post->thumbnail}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                            <h5 class="card-title">{{ $post->title }}</h5>
-                            <p class="card-text">{{ $post->author }}</p>
-                            <a href="{{route('posts.show', $post->slug)}}" class="btn btn-primary">Leggi l'articolo</a>
-                            </div>
-                        </div>
-                    @endforeach
+
+                <div class="links">
+                    <a href="https://laravel.com/docs">Docs</a>
+                    <a href="https://laracasts.com">Laracasts</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://blog.laravel.com">Blog</a>
+                    <a href="https://nova.laravel.com">Nova</a>
+                    <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://vapor.laravel.com">Vapor</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
         </div>
