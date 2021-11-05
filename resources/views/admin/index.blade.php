@@ -1,10 +1,14 @@
 @extends('layouts.dashboard')
+@section('title', 'Dashboard')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <h2>Welcome back, {{Auth::user()->name}}</h2>
+            <p>Oggi è il {{date('d-m-Y')}} e sono le {{date('H:i')}}</p>
+
+            {{-- <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
@@ -16,7 +20,7 @@
 
                     {{ __('You are logged in!') }}
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

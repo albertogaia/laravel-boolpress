@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Blog')
+
 @section('content')
 <div class="container d-flex">
     @foreach ($posts as $post)

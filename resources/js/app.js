@@ -9,3 +9,5 @@ deleteForm.forEach(item => {
         }
     })
 })
+
+$('.alert').alert()

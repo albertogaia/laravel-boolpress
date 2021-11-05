@@ -37280,6 +37280,7 @@ deleteForm.forEach(function (item) {
     }
   });
 });
+$('.alert').alert();
 
 /***/ }),
 

@@ -1,0 +1,11 @@
+.my-nav {
+    height: 80px;
+}
+
+.my-nav-side {
+    height: calc(100vh - 80px);
+}
+
+.text-muted:hover {
+    color: #f8f9fa !important;
+}
