@@ -12,20 +12,33 @@
 
                         <div class="form-group">
                             <label for="title">Titolo</label>
-                            <input type="text" name="title" id="title" class="form-control">
+                            <input value="{{old('title')}}" type="text" name="title" id="title" class="form-control  
+                            @error('title')
+                                is-invalid
+                            @enderror">
+                            @error('title')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="content">Content</label>
-                            <textarea type="text" name="content" id="content" class="form-control"></textarea>
+                            <textarea type="text" name="content" id="content" class="form-control @error('content') is-invalid @enderror">{{old('content')}}</textarea>@error('content') <div class="alert alert-danger">{{ $message }}</div>@enderror
                         </div>
                         <div class="form-group">
                             <label for="thumbnail">Thumbnail</label>
-                            <textarea type="text" name="thumbnail" id="thumbnail" class="form-control"></textarea>
+                            <textarea type="text" name="thumbnail" id="thumbnail" class="form-control
+                            @error('thumbnail') is-invalid @enderror">{{old('thumbnail')}}</textarea>@error('thumbnail')<div class="alert alert-danger">{{ $message }}</div>@enderror
                         </div>
                         <div class="form-group">
                             <label for="author">Author</label>
-                            <textarea type="text" name="author" id="author" class="form-control"></textarea>
+                            <input value="{{old('author')}}" type="text" name="author" id="author" class="form-control   
+                            @error('author')
+                                is-invalid
+                            @enderror">
+                            @error('author')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
