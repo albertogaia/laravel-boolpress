@@ -132,7 +132,7 @@ class PostController extends Controller
         }
 
         $post->update($form_data);
-        return redirect()->route('admin.posts.index')->with('updated', 'Post correttamente aggiornato');
+        return redirect()->route('admin.posts.index')->with('status', 'Post correttamente aggiornato');
 
     }
 
@@ -145,6 +145,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('admin.posts.index')->with('deleted', 'Post eliminato');
+        return redirect()->route('admin.posts.index')->with('status', 'Post eliminato');
     }
 }
