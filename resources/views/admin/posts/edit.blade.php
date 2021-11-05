@@ -23,19 +23,22 @@
 
                         <div class="form-group">
                             <label for="content">Content</label>
-                            <textarea type="text" name="content" id="content" class="form-control">{{old('content', $post->content)}}">
+                            <textarea type="text" name="content" id="content" class="form-control">{{old('content', $post->content)}}
                             </textarea>
-                            @error('thumbnail')
+                            @error('content')
                                     <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="thumbnail">Thumbnail</label>
                             <input value="{{old('thumbnail', $post->thumbnail)}}" type="text" name="thumbnail" id="thumbnail" class="form-control">
+                            @error('thumbnail')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <button onclick="window.confirmDelete();" type="submit" class="btn btn-success">Modifica</button>
+                            <button type="submit" class="btn btn-success">Modifica</button>
                         </div>
 
                     </form>
