@@ -5,31 +5,27 @@
         <div class="row">
             <div class="col-12">
                 <article>
-                    <h1>Vista Create Post</h1>
-                    <form action="{{route('admin.posts.store')}}" method="post">
+                    <h1>Modifica Post</h1>
+                    <form action="{{route('admin.posts.update', $post->id)}}" method="post">
                         @csrf
-                        @method('POST')
+                        @method('PUT')
 
                         <div class="form-group">
                             <label for="title">Titolo</label>
-                            <input type="text" name="title" id="title" class="form-control">
+                            <input type="text" name="title" id="title" class="form-control" value="{{$post->title}}">
                         </div>
 
                         <div class="form-group">
                             <label for="content">Content</label>
-                            <textarea type="text" name="content" id="content" class="form-control"></textarea>
+                            <textarea type="text" name="content" id="content" class="form-control">{{$post->content}}"</textarea>
                         </div>
                         <div class="form-group">
                             <label for="thumbnail">Thumbnail</label>
-                            <textarea type="text" name="thumbnail" id="thumbnail" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="author">Author</label>
-                            <textarea type="text" name="author" id="author" class="form-control"></textarea>
+                            <input type="text" name="thumbnail" id="thumbnail" class="form-control" value="{{$post->title}}">
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success">Crea post</button>
+                            <button type="submit" class="btn btn-success">Modifica</button>
                         </div>
 
                     </form>
