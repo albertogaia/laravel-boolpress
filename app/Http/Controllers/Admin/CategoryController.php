@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $new_category = new Category;
         $new_category->fill($form_data);
 
-        $slug = Str::slug($new_category->title, '-');
+        $slug = Str::slug($new_category->name, '-');
 
         $slug_presente = Category::where('slug', $slug)->first();
         $contatore = 1;
