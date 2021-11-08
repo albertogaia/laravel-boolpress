@@ -51,7 +51,7 @@
                             <td><a href="{{ route('admin.categories.show', $category->id) }}">{{$category->name}}</a></td>
                             <td class="text-center">
                                 <a class="mx-2 text-reset btn btn-success" href="{{ route('admin.categories.show', $category->id) }}">Visualizza</a>
-                                <form action="{{route('admin.categories.destroy', $category->id)}}" class="d-inline-block delete-category" method="category">
+                                <form action="{{route('admin.categories.destroy', $category->id)}}" class="d-inline-block delete-category" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger mx-2" type="submit">DELETE</button>
