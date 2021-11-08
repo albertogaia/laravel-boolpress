@@ -43,7 +43,7 @@
                         <td><a href="{{ route('admin.posts.show', $post->id) }}">{{$post->title}}</a></td>
                         <th scope="row">
                             @if ($post->category)
-                                {{$post->category->name}}
+                                <a class="text-reset" href="{{route('admin.categories.show', $post->category->id)}}">{{$post->category->name}}</a>
                             @endif
                         </th>
                         <td class="text-center">
