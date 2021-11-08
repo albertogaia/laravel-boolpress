@@ -41,7 +41,7 @@
                         <th scope="row">{{$category->id}}</th>
                         <td><a href="{{ route('admin.categories.show', $category->id) }}">{{$category->name}}</a></td>
                         <td class="text-center">
-                            <a class="mx-2 text-reset btn btn-warning" href="{{ route('admin.categories.edit', $category->id) }}">Edit</a>
+                            <a class="mx-2 text-reset btn btn-warning" href="">Edit</a>
                             <form action="{{route('admin.categories.destroy', $category->id)}}" class="d-inline-block delete-category" method="category">
                                 @csrf
                                 @method('DELETE')

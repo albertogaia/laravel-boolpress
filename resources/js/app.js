@@ -10,7 +10,7 @@ deleteForm.forEach(item => {
     })
 })
 
-const alertDiv = document.querySelectorAll('.alert');
+const alertDiv = document.querySelectorAll('.alert-dismissible');
 if(alertDiv[0]){
     setTimeout(()=>{
         alertDiv[0].remove();
