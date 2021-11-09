@@ -48,6 +48,7 @@ class PostController extends Controller
             'content'=> 'required',
             'author'=>'required',
             'thumbnail'=>'required',
+            'tags'=>'exists:tags,id'
         ]);
 
 
@@ -74,6 +75,8 @@ class PostController extends Controller
 
         $new_post->slug = $slug;
         $new_post->save();
+
+        $new_post->tags()->attach($form_data['tags']);
 
         return redirect()->route('admin.posts.index')->with('inserted', 'Il post è stato correttamente creato');
     }
@@ -152,6 +155,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->detach($post->id);
         $post->delete();
         return redirect()->route('admin.posts.index')->with('deleted', 'Post eliminato');
     }
