@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <article>
-                    <h1>Vista Create Post</h1>
+                    <h1>Crea un nuovo post</h1>
                     <form action="{{route('admin.posts.store')}}" method="post">
                         @csrf
                         @method('POST')
