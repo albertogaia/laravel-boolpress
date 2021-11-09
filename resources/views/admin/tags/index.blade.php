@@ -18,6 +18,14 @@
       </div>
     @endif
 
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="float-right">
+                <div class="btn btn-success"><a class="text-reset" href="{{route('admin.tags.create')}}">Nuovo Tag</a></div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12">
             <table class="table table-striped">

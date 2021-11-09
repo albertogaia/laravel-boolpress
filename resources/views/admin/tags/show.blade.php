@@ -41,7 +41,7 @@
                     </tbody>
                 </table>
             @else
-                <div class="alert alert-danger"><h3>:( Non ci sono ancora post con questa categoria</h3></div>
+                <div class="alert alert-danger"><h3>:( Non ci sono ancora post con questo Tag</h3></div>
             @endif
             </div>
         </div>

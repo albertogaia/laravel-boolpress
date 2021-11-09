@@ -27,7 +27,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tags.create');
     }
 
     /**
@@ -38,7 +38,26 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required'
+        ]);
+
+        $form_data = $request->all();
+        $new_tag = new Tag;
+        $new_tag->fill($form_data);
+        $slug = Str::slug($new_tag->name, '-');
+
+        $slug_presente = Tag::where('slug', $slug)->first();
+        $contatore = 1;
+        while($slug_presente){
+            $slug = $slug . '-' . $contatore;
+            $slug_presente = Tag::where('slug', $slug)->first();
+            $contatore++;
+        }
+        $new_tag->slug = $slug;
+        $new_tag->save();
+
+        return redirect()->route('admin.tags.index')->with('inserted', 'Il tag è stata correttamente creato');
     }
 
     /**
