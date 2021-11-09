@@ -88,7 +88,7 @@ class PostController extends Controller
                     $tagsID[] = $new_tag->id;
                 }
 
-                $slug_new_tag = Str::slug($tagName, '-');
+                $slug_new_tag = Str::slug($new_tag->name, '-');
                 $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
                 $contatore_tag = 1;
 
@@ -98,6 +98,7 @@ class PostController extends Controller
                     $contatore_tag++;
                 }
                 $new_tag->$slug_new_tag = $slug_new_tag;
+
                 $new_tag->save();
             }
         }
@@ -105,6 +106,7 @@ class PostController extends Controller
         // salviamo
         $new_post->save();
 
+        // $new_post->tags()->sync($tagsID);
         if(array_key_exists('tags', $form_data)){
             $new_post->tags()->attach($form_data['tags']);
         }

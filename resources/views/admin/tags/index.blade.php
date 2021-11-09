@@ -46,8 +46,7 @@
                             <td class="text-center">
                                 <a class="mx-2 text-reset btn btn-success" href="{{ route('admin.tags.show', $tag->id) }}">Visualizza</a>
                                 <a class="mx-2 text-reset btn btn-warning" href="{{ route('admin.tags.edit', $tag->id) }}">Modifica</a>
-                                {{-- Da creare Funzione Destroy --}}
-                                <form action="{{route('admin.tags.destroy', $tag->id)}}" class="d-inline-block delete-tag" method="POST">
+                                <form action="{{route('admin.tags.destroy', $tag->id)}}" class="d-inline-block delete-post" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger mx-2" type="submit">DELETE</button>

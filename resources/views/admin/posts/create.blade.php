@@ -69,7 +69,7 @@
                             </div>
     
                             <div class="form-group w-50">
-                                <label for="author">Crea nuovo tag</label>
+                                <label for="author">Crea nuovo tag <span class="font-italic">(o più tag separati da virgole)</span></label>
                                 <input value="{{old('new_tags')}}" type="text" name="new_tags" id="new_tags" class="form-control   
                                 @error('new_tags')
                                     is-invalid
