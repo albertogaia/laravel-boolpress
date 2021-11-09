@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <label for="author">Author</label>
-                            <input value="{{old('author')}}" type="text" name="author" id="author" class="form-control   
+                            <input value="{{old('author', Auth::user()->name)}}" type="text" name="author" id="author" class="form-control   
                             @error('author')
                                 is-invalid
                             @enderror">
