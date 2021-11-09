@@ -42,6 +42,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+
         // Per prima cosa valido i dati che arrivano dal form
         $request->validate([
             'title'=>'required|max:255',
@@ -169,4 +171,6 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('admin.posts.index')->with('deleted', 'Post eliminato');
     }
+
+
 }
