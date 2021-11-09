@@ -43,15 +43,16 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
-
+        
         // Per prima cosa valido i dati che arrivano dal form
         $request->validate([
             'title'=>'required|max:255',
             'content'=> 'required',
             'author'=>'required',
             'thumbnail'=>'required',
-            'tags'=>'exists:tags,id'
+            'tags'=>'exists:tags,id',
         ]);
+
 
 
         $form_data=$request->all();
@@ -76,9 +77,37 @@ class PostController extends Controller
         }
 
         $new_post->slug = $slug;
+
+        // Creiamo i nuovi tags
+        if($request->get('new_tags')){
+            $tagNames = explode(',',$request->get('new_tags'));
+            $tagsID = [];
+            foreach($tagNames as $tagName){
+                $new_tag = Tag::firstOrCreate(['name'=>$tagName]);
+                if($new_tag){
+                    $tagsID[] = $new_tag->id;
+                }
+
+                $slug_new_tag = Str::slug($tagName, '-');
+                $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
+                $contatore_tag = 1;
+
+                while($slug_tag_presente){
+                    $slug_new_tag = $slug_new_tag . '-' . $contatore_tag;
+                    $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
+                    $contatore_tag++;
+                }
+                $new_tag->$slug_new_tag = $slug_new_tag;
+                $new_tag->save();
+            }
+        }
+
+        // salviamo
         $new_post->save();
 
-        $new_post->tags()->attach($form_data['tags']);
+        if(array_key_exists('tags', $form_data)){
+            $new_post->tags()->attach($form_data['tags']);
+        }
 
         return redirect()->route('admin.posts.index')->with('inserted', 'Il post è stato correttamente creato');
     }

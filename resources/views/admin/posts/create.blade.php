@@ -55,17 +55,32 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <p>Seleziona i tag:</p>
-                            @foreach ($tags as $tag)
-                                <div class="form-check form-check-inline">
-                                    <input 
-                                    {{in_array($tag->id, old('tags', [])) ? 'checked' : null}}
-                                    value="{{ $tag->id }}" type="checkbox" name="tags[]" class="form-check-input" id="{{'tag' . $tag->id}}">
-                                    <label class="form-check-label" for="{{'tag' . $tag->id}}">{{ $tag->name }}</label>
-                                </div>   
-                            @endforeach
+                        <div class="d-flex">
+                            <div class="form-group w-50">
+                                <p>Seleziona i tag:</p>
+                                @foreach ($tags as $tag)
+                                    <div class="form-check form-check-inline">
+                                        <input 
+                                        {{in_array($tag->id, old('tags', [])) ? 'checked' : null}}
+                                        value="{{ $tag->id }}" type="checkbox" name="tags[]" class="form-check-input" id="{{'tag' . $tag->id}}">
+                                        <label class="form-check-label" for="{{'tag' . $tag->id}}">{{ $tag->name }}</label>
+                                    </div> 
+                                @endforeach
+                            </div>
+    
+                            <div class="form-group w-50">
+                                <label for="author">Crea nuovo tag</label>
+                                <input value="{{old('new_tags')}}" type="text" name="new_tags" id="new_tags" class="form-control   
+                                @error('new_tags')
+                                    is-invalid
+                                @enderror">
+                                @error('new_tags')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                         </div>
+
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Crea post</button>

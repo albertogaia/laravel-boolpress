@@ -38,6 +38,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->url();
+        
         $request->validate([
             'name'=>'required'
         ]);
