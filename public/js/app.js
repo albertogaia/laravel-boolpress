@@ -37285,7 +37285,7 @@ var alertDiv = document.querySelectorAll('.alert-dismissible');
 if (alertDiv[0]) {
   setTimeout(function () {
     alertDiv[0].remove();
-  }, 2000);
+  }, 3000);
 }
 
 /***/ }),
