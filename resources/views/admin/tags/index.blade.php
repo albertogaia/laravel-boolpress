@@ -25,6 +25,7 @@
                     <tr>
                     <th scope="col"># ID</th>
                     <th scope="col">Nome tag</th>
+                    <th scope="col">N° Posts</th>
                     <th class="text-center" scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -33,13 +34,16 @@
                         <tr>
                             <th scope="row">{{$tag->id}}</th>
                             <td><a href="{{ route('admin.tags.show', $tag->id) }}">{{$tag->name}}</a></td>
+                            <td><a href="{{ route('admin.tags.show', $tag->id) }}">{{count($tag->posts)}}</a></td>
                             <td class="text-center">
-                                {{-- <a class="mx-2 text-reset btn btn-success" href="{{ route('admin.tags.show', $tag->id) }}">Visualizza</a> --}}
-                                {{-- <form action="{{route('admin.tags.destroy', $tag->id)}}" class="d-inline-block delete-tag" method="POST">
+                                <a class="mx-2 text-reset btn btn-success" href="{{ route('admin.tags.show', $tag->id) }}">Visualizza</a>
+
+                                {{-- Da creare Funzione Destroy --}}
+                                <form action="{{route('admin.tags.destroy', $tag->id)}}" class="d-inline-block delete-tag" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger mx-2" type="submit">DELETE</button>
-                                </form> --}}
+                                </form>
                             </td>
                         </tr>
                     @endforeach

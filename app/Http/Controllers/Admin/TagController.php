@@ -49,7 +49,10 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        $tag = Tag::where('id', $id)->first();
+        if(!$tag){
+            abort(404);
+        }return view('admin.tags.show', compact('tag'));
     }
 
     /**
