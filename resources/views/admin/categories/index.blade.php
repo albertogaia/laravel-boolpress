@@ -41,6 +41,7 @@
                     <tr>
                     <th scope="col"># ID</th>
                     <th scope="col">Name</th>
+                    <th scope="col">N° Posts</th>
                     <th class="text-center" scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -49,6 +50,7 @@
                         <tr>
                             <th scope="row">{{$category->id}}</th>
                             <td><a href="{{ route('admin.categories.show', $category->id) }}">{{$category->name}}</a></td>
+                            <td><a href="{{ route('admin.categories.show', $category->id) }}">{{count($category->posts)}}</a></td>
                             <td class="text-center">
                                 <a class="mx-2 text-reset btn btn-success" href="{{ route('admin.categories.show', $category->id) }}">Visualizza</a>
                                 <form action="{{route('admin.categories.destroy', $category->id)}}" class="d-inline-block delete-category" method="POST">
