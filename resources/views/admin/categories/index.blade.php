@@ -53,6 +53,7 @@
                             <td><a href="{{ route('admin.categories.show', $category->id) }}">{{count($category->posts)}}</a></td>
                             <td class="text-center">
                                 <a class="mx-2 text-reset btn btn-success" href="{{ route('admin.categories.show', $category->id) }}">Visualizza</a>
+                                <a class="mx-2 text-reset btn btn-warning" href="{{ route('admin.categories.edit', $category->id) }}">Modifica</a>
                                 <form action="{{route('admin.categories.destroy', $category->id)}}" class="d-inline-block delete-category" method="POST">
                                     @csrf
                                     @method('DELETE')
