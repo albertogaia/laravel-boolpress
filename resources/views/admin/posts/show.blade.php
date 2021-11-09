@@ -10,10 +10,18 @@
                     <header class="mb-4">
                         <h1 class="fw bolder mb-1">{{ $post->title }}</h1>
                     </header>
-                    <div class="text-muded fst-italic mb-2">
-                        Author: {{ $post->author }} <br>
-                        Category: <a href="{{route('admin.categories.show', $post->category->id)}}">{{$post->category->name}}</a>
-                    </div>
+                    @if ($post->category)
+                        <div class="text-muded fst-italic mb-2">
+                            Author: {{ $post->author }} <br>
+                            Category: <a href="{{route('admin.categories.show', $post->category->id)}}">{{$post->category->name}}</a>
+                        </div>
+                    @else
+                        <div class="text-muded fst-italic mb-2">
+                            Author: {{ $post->author }} <br>
+                            Category: Nessuna categoria di appartenenza</a>
+                        </div>
+                    @endif
+                    
                     <figure class="mb-4">
                         <img src="{{ $post->thumbnail }}" alt="" class="img-fluid rounded">
                     </figure>

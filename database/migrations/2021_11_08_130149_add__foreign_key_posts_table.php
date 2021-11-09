@@ -18,7 +18,7 @@ class AddForeignKeyPostsTable extends Migration
             $table->unsignedBigInteger('category_id')->nullable()->after('slug');
 
             // Setto la colonna come chiave esterna
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
 
