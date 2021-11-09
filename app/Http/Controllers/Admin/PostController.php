@@ -108,8 +108,9 @@ class PostController extends Controller
         }
 
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -125,6 +126,8 @@ class PostController extends Controller
             'title'=>'required|max:255',
             'content'=> 'required',
             'thumbnail'=>'required',
+            'category_id'=>'nullable|exists:categories,id',
+            'tags'=>'nullable|exists:tags,id',
         ]);
 
         $form_data = $request->all();
@@ -143,6 +146,13 @@ class PostController extends Controller
         }
 
         $post->update($form_data);
+
+        if(array_key_exists('tags', $form_data)){
+            $post->tags()->sync($form_data['tags']);
+        }else{
+            $post->tags()->sync($form_data[]);
+        }
+
         return redirect()->route('admin.posts.index')->with('updated', 'Post correttamente aggiornato');
 
     }
