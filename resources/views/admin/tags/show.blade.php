@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2>Categoria: {{$tag->name}}</h2>
+                <h2>Tag: {{$tag->name}}</h2>
                 <h4>Slug: {{$tag->slug}}</h4>
             </div>
         </div>

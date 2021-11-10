@@ -17,9 +17,10 @@
                             <br>
                             Tags: 
                             @foreach ($post->tags as $tag)
-                                <a href="{{route('admin.tags.show', $tag->id)}}">{{$tag->name}}, </a>
                                 @if ($loop->last)
                                     <a href="{{route('admin.tags.show', $tag->id)}}">{{$tag->name}}</a>
+                                @else 
+                                    <a href="{{route('admin.tags.show', $tag->id)}}">{{$tag->name}}, </a>
                                 @endif
                             @endforeach
                         
