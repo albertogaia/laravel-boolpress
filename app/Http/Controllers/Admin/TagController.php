@@ -37,9 +37,7 @@ class TagController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        return $request->url();
-        
+    {   
         $request->validate([
             'name'=>'required'
         ]);

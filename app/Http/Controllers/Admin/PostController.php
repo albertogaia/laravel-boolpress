@@ -48,8 +48,8 @@ class PostController extends Controller
             'content'=> 'required',
             'author'=>'required',
             'thumbnail'=>'required',
-            'tags'=>'exists:tags,id',
-            'new_tags'=>'nullable'
+            'tags'=>'nullable|exists:tags,id', // può essere vuoto
+            'new_tags'=>'nullable' // può essere vuoto
         ]);
 
         $form_data=$request->all();
@@ -75,18 +75,37 @@ class PostController extends Controller
 
         $new_post->slug = $slug;
 
-        // Creiamo i nuovi tags
+        // ! Creiamo i nuovi tags
         if($request->get('new_tags')){
+            // Voglio dividere i tag che ricevo separati da virgola
             $tagNames = explode(',',$request->get('new_tags'));
+
+
             foreach($tagNames as $tagName){
                 //// $slug_tag_presente = Tag::where('slug', $tagName)->first();
                 //// dump($slug_tag_presente);
+                // Creo nuovo slug per ciascun nuovo nome
                 $slug_new_tag = Str::slug($tagName, '-');
                 $new_tag = new Tag;
 
+                // Gli imposto un nome e uno slug mannaggia  a loro
                 $new_tag->name = $tagName;
                 $new_tag->slug = $slug_new_tag;
 
+                // salvo il nuovo tag
+                $new_tag->save();
+                
+                // Questo è un controllo per verificare se l'utente ha selezionato o meno
+                // i tag già esistenti perchè se non venivano selezionati mi davano errori
+                // se ci sono stati tags selezionati pusho in quell'array il nuovo tag creato
+                // se invece non ha selezionato nessun tag, allora creo l'array contenente 
+                // l'id del nuovo tag
+                if(isset($form_data['tags'])){
+                    array_push($form_data['tags'], strval($new_tag->id));
+                }else{
+                
+                    $form_data['tags'] = [strval($new_tag->id)];
+                }
 
                 //// dump($new_tag);
                 //// $new_tag->save();
@@ -101,23 +120,19 @@ class PostController extends Controller
 
                 //// $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
                 //// $contatore_tag = 1;
-
                 //// while($slug_tag_presente){
                 ////     $slug_new_tag = $slug_new_tag . '-' . $contatore_tag;
                 ////     $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
                 ////     $contatore_tag++;
                 //// }
                 //// $new_tag->$slug_new_tag = $slug_new_tag;
-                $new_tag->save();
-                array_push($form_data['tags'], strval($new_tag->id) );
+
 
             }
         }
 
-        // salviamo
+        // salviamo il post
         $new_post->save();
-        var_dump($form_data['tags']);
-
         // $new_post->tags()->attach($form_data['tags']);
 
         if(array_key_exists('tags', $form_data)){
