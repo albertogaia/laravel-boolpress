@@ -42,8 +42,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
-        
         // Per prima cosa valido i dati che arrivano dal form
         $request->validate([
             'title'=>'required|max:255',
@@ -52,8 +50,6 @@ class PostController extends Controller
             'thumbnail'=>'required',
             'tags'=>'exists:tags,id',
         ]);
-
-
 
         $form_data=$request->all();
         $new_post = new Post();
@@ -79,25 +75,37 @@ class PostController extends Controller
         $new_post->slug = $slug;
 
         // Creiamo i nuovi tags
+        
         if($request->get('new_tags')){
             $tagNames = explode(',',$request->get('new_tags'));
-            $tagsID = [];
+            // $tagsID = [];
             foreach($tagNames as $tagName){
-                $new_tag = Tag::firstOrCreate(['name'=>$tagName]);
-                if($new_tag){
-                    $tagsID[] = $new_tag->id;
-                }
+                //// $slug_tag_presente = Tag::where('slug', $tagName)->first();
+                //// dump($slug_tag_presente);
+                $slug_new_tag = Str::slug($tagName, '-');
+                $new_tag = new Tag;
+                $new_tag->name = $tagName;
+                $new_tag->slug = $slug_new_tag;
+                // dump($new_tag);
+                // $new_tag->save();
 
-                $slug_new_tag = Str::slug($new_tag->name, '-');
-                $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
-                $contatore_tag = 1;
 
-                while($slug_tag_presente){
-                    $slug_new_tag = $slug_new_tag . '-' . $contatore_tag;
-                    $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
-                    $contatore_tag++;
-                }
-                $new_tag->$slug_new_tag = $slug_new_tag;
+                // return $slug_new_tag;
+                // $new_tag = Tag::firstOrCreate(['name'=>$tagName]);
+                // if($new_tag){
+                //     $tagsID[] = $new_tag->id;
+                // }
+                // $slug_new_tag = Str::slug($new_tag->name, '-');
+
+                // $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
+                // $contatore_tag = 1;
+
+                // while($slug_tag_presente){
+                //     $slug_new_tag = $slug_new_tag . '-' . $contatore_tag;
+                //     $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
+                //     $contatore_tag++;
+                // }
+                // $new_tag->$slug_new_tag = $slug_new_tag;
 
                 $new_tag->save();
             }
@@ -106,7 +114,7 @@ class PostController extends Controller
         // salviamo
         $new_post->save();
 
-        // $new_post->tags()->sync($tagsID);
+        $new_post->tags()->attach([$form_data['tags'], $form_data['new_tags']]);
         if(array_key_exists('tags', $form_data)){
             $new_post->tags()->attach($form_data['tags']);
         }
@@ -122,10 +130,11 @@ class PostController extends Controller
      */
     public function show($id)
     {
+        $tags = Tag::all();
         $post = Post::where('id', $id)->first();
         if(!$post){
             abort(404);
-        }return view('admin.posts.show', compact('post'));
+        }return view('admin.posts.show', compact('post', 'tags'));
     }
 
     /**

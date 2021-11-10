@@ -14,6 +14,15 @@
                         <div class="text-muded fst-italic mb-2">
                             Author: {{ $post->author }} <br>
                             Category: <a href="{{route('admin.categories.show', $post->category->id)}}">{{$post->category->name}}</a>
+                            <br>
+                            Tags: 
+                            @foreach ($post->tags as $tag)
+                                <a href="{{route('admin.tags.show', $tag->id)}}">{{$tag->name}}, </a>
+                                @if ($loop->last)
+                                    <a href="{{route('admin.tags.show', $tag->id)}}">{{$tag->name}}</a>
+                                @endif
+                            @endforeach
+                        
                         </div>
                     @else
                         <div class="text-muded fst-italic mb-2">

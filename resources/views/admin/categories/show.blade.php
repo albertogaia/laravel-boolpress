@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-12">
             <h2>Lista dei post collegati alla categoria:</h2>
-            @forelse ($category->posts as $post)
+            @if ($category->posts->isNotEmpty())
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -39,9 +39,9 @@
                         @endforeach
                     </tbody>
                 </table>
-            @empty
+            @else
                 <div class="alert alert-danger"><h3>:( Non ci sono ancora post con questa categoria</h3></div>
-            @endforelse
+            @endif
             </div>
         </div>
     </div>
