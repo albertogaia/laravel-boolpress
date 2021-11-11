@@ -128,7 +128,7 @@ class PostController extends Controller
         }
 
         // salviamo il post
-        $new_post->save();
+        $new_post->save(); 
         // $new_post->tags()->attach($form_data['tags']);
 
         if(array_key_exists('tags', $form_data)){
