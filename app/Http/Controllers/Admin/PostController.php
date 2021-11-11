@@ -95,11 +95,7 @@ class PostController extends Controller
                 // salvo il nuovo tag
                 $new_tag->save();
                 
-                // Questo è un controllo per verificare se l'utente ha selezionato o meno
-                // i tag già esistenti perchè se non venivano selezionati mi davano errori
-                // se ci sono stati tags selezionati pusho in quell'array il nuovo tag creato
-                // se invece non ha selezionato nessun tag, allora creo l'array contenente 
-                // l'id del nuovo tag
+                // Controllo se stati selezionati già tag esistenti
                 if(isset($form_data['tags'])){
                     array_push($form_data['tags'], strval($new_tag->id));
                 }else{
@@ -231,6 +227,4 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('admin.posts.index')->with('deleted', 'Post eliminato');
     }
-
-
 }
