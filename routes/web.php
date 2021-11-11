@@ -28,4 +28,6 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
     Route::resource('/categories', 'CategoryController');
     Route::resource('/posts', 'PostController');
     Route::resource('/tags', 'TagController');
+
+    Route::delete('/selected-posts', 'CustomController@deleteCheckedPosts')->name('deletePost');
 });

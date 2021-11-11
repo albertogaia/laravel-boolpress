@@ -129,7 +129,7 @@ class PostController extends Controller
 
         // salviamo il post
         $new_post->save(); 
-        // $new_post->tags()->attach($form_data['tags']);
+        //// $new_post->tags()->attach($form_data['tags']);
 
         if(array_key_exists('tags', $form_data)){
             $new_post->tags()->attach($form_data['tags']);
@@ -227,4 +227,5 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('admin.posts.index')->with('deleted', 'Post eliminato');
     }
+
 }
