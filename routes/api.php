@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// Stiamo richiedendo il seguente link: http://127.0.0.1:8000/api/posts
+Route::resource('/posts', 'Api\Postcontroller');

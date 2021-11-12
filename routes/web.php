@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomController;
 use Illuminate\Support\Facades\Route;
 use \Illuminate\Support\Facades\Auth;
 
@@ -16,6 +17,8 @@ use \Illuminate\Support\Facades\Auth;
 
 /* Rotta che gestisce la homepage visibile agli utenti */
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('/vue-posts', 'HomeController@listPostsApi')->name('list-posts-api');
+
 Route::resource('/posts', 'PostController');
 /* Serie di rotte che gestiscono il meccanismo di autenticazione */
 Auth::routes();
@@ -28,6 +31,7 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
     Route::resource('/categories', 'CategoryController');
     Route::resource('/posts', 'PostController');
     Route::resource('/tags', 'TagController');
-
-    Route::delete('/selected-posts', 'CustomController@deleteCheckedPosts')->name('deletePost');
+    
+    // Rotte per la pagina profilo
+    Route::get('profile', 'HomeController@profile')->name('profile');
 });
