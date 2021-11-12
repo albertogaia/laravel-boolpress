@@ -1951,7 +1951,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       url: "http://127.0.0.1:8000/api/posts",
-      posts: []
+      posts: [],
+      api_token: "bbzRf42NwlCuPIdwL7AiHgXskzLa69GB61Tn8QA7VZ1woSustPL1NfelqeHpfolpwhwX6lR1OolmJf3k"
     };
   },
   created: function created() {
@@ -1961,8 +1962,17 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
-      //   console.log("Chiamata API");
-      axios.get(this.url).then(function (response) {
+      console.log("Chiamata API");
+      var bodyParameters = {
+        key: "value"
+      };
+      var config = {
+        headers: {
+          Authorization: "Bearer ".concat(this.api_token)
+        }
+      };
+      console.log(config);
+      axios.post(this.url, bodyParameters, config).then(function (response) {
         _this.posts = response.data.results;
       })["catch"]();
     }

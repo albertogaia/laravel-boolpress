@@ -37,7 +37,7 @@ class CheckApiToken
                 'error'=>'API Token errato'
             ]);
         }
-        
+
         return $next($request);
     }
 }

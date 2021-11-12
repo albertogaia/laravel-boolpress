@@ -19,4 +19,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Stiamo richiedendo il seguente link: http://127.0.0.1:8000/api/posts
-Route::resource('/posts', 'Api\Postcontroller')->middleware('api_token_check');
+Route::post('/posts', 'Api\PostController@index')->middleware('api_token_check');

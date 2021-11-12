@@ -17,6 +17,8 @@ export default {
     return {
       url: "http://127.0.0.1:8000/api/posts",
       posts: [],
+      api_token:
+        "bbzRf42NwlCuPIdwL7AiHgXskzLa69GB61Tn8QA7VZ1woSustPL1NfelqeHpfolpwhwX6lR1OolmJf3k",
     };
   },
   created() {
@@ -24,9 +26,18 @@ export default {
   },
   methods: {
     getPosts() {
-      //   console.log("Chiamata API");
+      console.log("Chiamata API");
+
+      const bodyParameters = {
+        key: "value",
+      };
+
+      const config = {
+        headers: { Authorization: `Bearer ${this.api_token}` },
+      };
+      console.log(config);
       axios
-        .get(this.url)
+        .post(this.url, bodyParameters, config)
         .then((response) => {
           this.posts = response.data.results;
         })
