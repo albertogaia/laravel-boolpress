@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\Tag;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 class PostController extends Controller
 {
@@ -47,14 +47,22 @@ class PostController extends Controller
             'title'=>'required|max:255',
             'content'=> 'required',
             'author'=>'required',
-            'thumbnail'=>'required',
             'tags'=>'nullable|exists:tags,id', // può essere vuoto
-            'new_tags'=>'nullable' // può essere vuoto
+            'new_tags'=>'nullable', // può essere vuoto
+            'image'=>'nullable|image'
         ]);
 
         $form_data=$request->all();
         $new_post = new Post();
 
+        if(array_key_exists('image', $form_data)){
+            //salviamo l'immagine e recuperiamo il path
+            $cover_path = Storage::put('post_covers', $form_data['image']);
+        
+            // aggiungiamo all'array che viene usato nella funzione fill la chiave cover
+            // che contiene il percorso relativo dell'immagine caricata a partire  da public/storage
+            $form_data['cover'] = $cover_path;
+        }
         // storiamo i dati con il metodo fill
         $new_post->fill($form_data);
 
@@ -82,8 +90,6 @@ class PostController extends Controller
 
 
             foreach($tagNames as $tagName){
-                //// $slug_tag_presente = Tag::where('slug', $tagName)->first();
-                //// dump($slug_tag_presente);
                 // Creo nuovo slug per ciascun nuovo nome
                 $slug_new_tag = Str::slug($tagName, '-');
                 $new_tag = new Tag;
@@ -102,27 +108,6 @@ class PostController extends Controller
                 
                     $form_data['tags'] = [strval($new_tag->id)];
                 }
-
-                //// dump($new_tag);
-                //// $new_tag->save();
-
-
-                //// return $slug_new_tag;
-                //// $new_tag = Tag::firstOrCreate(['name'=>$tagName]);
-                //// if($new_tag){
-                ////     $tagsID[] = $new_tag->id;
-                //// }
-                //// $slug_new_tag = Str::slug($new_tag->name, '-');
-
-                //// $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
-                //// $contatore_tag = 1;
-                //// while($slug_tag_presente){
-                ////     $slug_new_tag = $slug_new_tag . '-' . $contatore_tag;
-                ////     $slug_tag_presente = Tag::where('slug', $slug_new_tag)->first();
-                ////     $contatore_tag++;
-                //// }
-                //// $new_tag->$slug_new_tag = $slug_new_tag;
-
 
             }
         }
@@ -183,9 +168,9 @@ class PostController extends Controller
         $request->validate([
             'title'=>'required|max:255',
             'content'=> 'required',
-            'thumbnail'=>'required',
             'category_id'=>'nullable|exists:categories,id',
             'tags'=>'nullable|exists:tags,id',
+            'image'=>'nullable|image'
         ]);
 
         $form_data = $request->all();
@@ -201,6 +186,13 @@ class PostController extends Controller
                 $contatore++;
             }
             $form_data['slug'] = $slug;
+        }
+
+        if(array_key_exists('image', $form_data)){
+            Storage::delete($post->cover);
+            // salvo l'immagine e recupero il path
+            $cover_path = Storage::put('post_covers', $form_data['image']);
+            $form_data['cover'] = $cover_path;
         }
 
         $post->update($form_data);

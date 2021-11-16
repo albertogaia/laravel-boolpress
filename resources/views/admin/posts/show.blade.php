@@ -7,6 +7,9 @@
             <div class="col-12">
                 <article>
                     <h3 class="mb-3">ID post: {{$post->id}}</h3>
+                    @if($post->cover)
+	                    <img src="{{ asset('storage/'.$post->cover)}}" alt="{{ $post->title}}">
+                    @endif
                     <header class="mb-4">
                         <h1 class="fw bolder mb-1">{{ $post->title }}</h1>
                     </header>
@@ -32,9 +35,6 @@
                         </div>
                     @endif
                     
-                    <figure class="mb-4">
-                        <img src="{{ $post->thumbnail }}" alt="" class="img-fluid rounded">
-                    </figure>
                     <section class="mb-5">
                         <p class="fs-5">
                             {{ $post->content }}

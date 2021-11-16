@@ -7,7 +7,7 @@
             <div class="col-12">
                 <article>
                     <h1>Modifica Post</h1>
-                    <form action="{{route('admin.posts.update', $post->id)}}" method="post">
+                    <form action="{{route('admin.posts.update', $post->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -30,11 +30,18 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        @if($post->cover)
+                            <p>Immagine di copertina presente:</p>
+                            <img src="{{ asset('storage/'.$post->cover)}}" alt="{{ $post->title}}">
+                        @else
+                            <p>Nessuna copertina presente</p>
+                        @endif
                         <div class="form-group">
-                            <label for="thumbnail">Thumbnail</label>
-                            <input value="{{old('thumbnail', $post->thumbnail)}}" type="text" name="thumbnail" id="thumbnail" class="form-control">
-                            @error('thumbnail')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <label for="image">Carica un'immagine di copertina: </label>
+                            <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
+                            @error('image')
+                                <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
 

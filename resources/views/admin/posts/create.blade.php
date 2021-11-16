@@ -7,7 +7,7 @@
             <div class="col-12">
                 <article>
                     <h1>Crea un nuovo post</h1>
-                    <form action="{{route('admin.posts.store')}}" method="post">
+                    <form action="{{route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
 
@@ -26,11 +26,7 @@
                             <label for="content">Content</label>
                             <textarea type="text" name="content" id="content" class="form-control @error('content') is-invalid @enderror">{{old('content')}}</textarea>@error('content') <div class="alert alert-danger">{{ $message }}</div>@enderror
                         </div>
-                        <div class="form-group">
-                            <label for="thumbnail">Thumbnail</label>
-                            <textarea type="text" name="thumbnail" id="thumbnail" class="form-control
-                            @error('thumbnail') is-invalid @enderror">{{old('thumbnail')}}</textarea>@error('thumbnail')<div class="alert alert-danger">{{ $message }}</div>@enderror
-                        </div>
+
                         <div class="form-group">
                             <label for="author">Author</label>
                             <input value="{{old('author', Auth::user()->name)}}" type="text" name="author" id="author" class="form-control   
@@ -54,6 +50,15 @@
                                 @endforeach
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label for="image">Carica un'immagine di copertina: </label>
+                            <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
+                            @error('image')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        
 
                         <div class="d-flex">
                             <div class="form-group w-50">

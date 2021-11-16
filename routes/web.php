@@ -20,6 +20,7 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/vue-posts', 'HomeController@listPostsApi')->name('list-posts-api');
 
 Route::resource('/posts', 'PostController');
+
 /* Serie di rotte che gestiscono il meccanismo di autenticazione */
 Auth::routes();
 
