@@ -9,3 +9,9 @@
 .text-muted:hover {
     color: #f8f9fa !important;
 }
+
+.my-cover {
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
+}

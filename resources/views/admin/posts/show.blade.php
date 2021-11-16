@@ -8,7 +8,7 @@
                 <article>
                     <h3 class="mb-3">ID post: {{$post->id}}</h3>
                     @if($post->cover)
-	                    <img src="{{ asset('storage/'.$post->cover)}}" alt="{{ $post->title}}">
+	                    <img src="{{ asset('storage/'.$post->cover)}}" alt="{{ $post->title}}" class="img-fluid z-depth-1 rounded mb-4 my-cover">
                     @endif
                     <header class="mb-4">
                         <h1 class="fw bolder mb-1">{{ $post->title }}</h1>

@@ -7,7 +7,7 @@
         <div class="col-12">
             <article>
                 @if($post->cover)
-	                <img src="{{ asset('storage/'.$post->cover)}}" alt="{{ $post->title}}">
+	                <img src="{{ asset('storage/'.$post->cover)}}" alt="{{ $post->title}}" class="img-fluid z-depth-1 rounded mb-4 my-cover">
                 @endif
                 <h3 class="mb-3">ID post: {{$post->id}}</h3>
                 <header class="mb-4">
